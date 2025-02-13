@@ -1,24 +1,33 @@
 import './App.css';
 import MyNav from './components/MyNav.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {Container } from 'react-bootstrap';
-import BookCard from './components/Book.js';
+import { Container } from 'react-bootstrap';
 import MyFooter from './components/Footer.js';
+import { BookProvider } from './components/Context.js';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Home from './pages/Home.js';
+import Details from './pages/Details.js';
 
 
 
 function App() {
- 
   return (
-    <>
-      <MyNav />
-      <Container>
-        <BookCard className='mt-5' />
-      </Container>
-      <Container fluid>
-        <MyFooter  />
-      </Container>
-    </>
+    <BrowserRouter>
+      <BookProvider>
+        <MyNav />
+        <main>
+          <Container>
+            <Routes>
+              <Route path='/' element={<Home />} />
+              <Route path='/Details/:asin' element={<Details />} />
+            </Routes>
+          </Container>
+        </main>
+        <Container fluid>
+          <MyFooter />
+        </Container>
+      </BookProvider>
+    </BrowserRouter>
   );
 }
 

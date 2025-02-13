@@ -1,17 +1,23 @@
+import React from 'react';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
-
+import { useContext } from 'react';
+import {BookContext} from './Context.js';
+import { Link } from 'react-router-dom';
 
 
 function MyNav() {
+  const {selectquery, setSelectquery} = useContext(BookContext);
+  
   return (
+    <>
     <Navbar expand="lg" className="bg-body-tertiary">
       <Container fluid>
-        <Navbar.Brand href="#">Bookstore</Navbar.Brand>
+        <Navbar.Brand as={Link} to="/">Bookstore</Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
           <Nav
@@ -35,18 +41,23 @@ function MyNav() {
               Link
             </Nav.Link>
           </Nav>
+          
           <Form className="d-flex">
-            <Form.Control
+              <Form.Control
               type="search"
+              value={selectquery}
               placeholder="Search"
               className="me-2"
               aria-label="Search"
+              onChange={(e) => setSelectquery(e.target.value)}
             />
             <Button variant="outline-success">Search</Button>
           </Form>
         </Navbar.Collapse>
       </Container>
     </Navbar>
+    
+    </>
   );
 }
 

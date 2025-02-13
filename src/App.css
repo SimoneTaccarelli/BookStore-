@@ -1,9 +1,150 @@
+.comment-area{
+  display: flex;
+  flex-direction: column;
+  padding-top: 5px;
+  align-items: center;
+}
+
+.send-comment{
+  margin-top: 10px;
+}
+
+.comment-area textarea{
+  width: 100%;
+  height: 100px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.comment-area input{
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
 .card-img-top {
   height: 200px;
   object-fit: cover;
+  position: relative;
+  border-radius: 4px;
 }
 
-.selected { 
+ .selected { 
   border: 3px solid red !important;
+} 
+/* comment area */
+
+.textarea-selected {
+  display: none;
 }
+
+/* button area */
+
+.button-comment-selected {
+  display: none;
+}
+
+
+
+/* close button  */
+.close-selected {
+  display: none;
+}
+
+.close-area{
+  padding-top: 5px;
+}
+
+/* area button */
+
+.area-button Button{
+ width: 95px;
+ font-size: 14px;
+}
+
+/* card */
+.Card{
+  border-radius: 10px;
+}
+.card-body {
+  padding: 3px !important;
+  position:absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white !important;
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+  border-radius: 0 0 5px 5px;
+  display: none;
+  transition: all 0.3s ease-in-out;
+}
+
+.card:hover .card-body {
+  display: block;
+}
+
+/* spinner */
+
+.spinner-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  position: absolute;
+  top: 70%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.spinner{
+  width: 50px;
+  height: 50px;
+  border: 5px solid #f3f3f3;
+  border-top: 5px solid #3498db;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* error */
+
+.error-container{
+  color: red;
+  font-weight: bold;
+  font-size: 18px;
+  text-align: center;
+}
+
+/* footer */
+
+footer{
+  border-top: 2px solid #000000;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

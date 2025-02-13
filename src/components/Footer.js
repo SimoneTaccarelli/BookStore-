@@ -1,25 +1,27 @@
+import React from 'react';
 import { BsFacebook, BsInstagram, BsTwitter, BsYoutube } from "react-icons/bs";
+import { Row } from 'react-bootstrap';
 
 
 function MyFooter() {
   return (
     <>
-    <footer className="mt-5 row bg-secondary">
-        <div className="col-md-4">
-            <ul className="list-unstyled ">
-                <li><BsFacebook /></li>
-                <li><BsInstagram/></li>
-                <li><BsTwitter /></li>
-                <li><BsYoutube /></li>
-            </ul>
-        </div>
-        <div className="col-md-4">
-            <ul className="list-unstyled">
-                <li>Privacy Policy</li>
-                <li>Terms of Use</li>
-                <li>Contact Us</li>
-            </ul>
-        </div>
+      <footer className="mt-5 row bg-secondary">
+        <Row className='mt-3'>
+          <div className=' d-flex justify-content-center align-items-center'>
+            <BsFacebook className='mx-2' />
+            <BsInstagram className='mx-2' />
+            <BsTwitter className='mx-2' />
+            <BsYoutube className='mx-2' />
+          </div>
+        </Row>
+        <Row className='mt-3'>
+          <div className="d-flex justify-content-center align-items-center">
+            <p className='mx-2'>Privacy Policy</p>
+            <p className='mx-2'>Terms of Use</p>
+            <p className='mx-2'>Contact Us</p>
+          </div>
+        </Row>
       </footer>
     </>
   );

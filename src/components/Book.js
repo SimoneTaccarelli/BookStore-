@@ -1,46 +1,44 @@
-import data from '../dati/history.json'
-import { Button, Col, Row, Form } from 'react-bootstrap';
-import SingleBook from './singleBook';
-import { useState } from 'react';
+import React from 'react';
+import books from '../dati/history.json'
+import { Button, Col, Row } from 'react-bootstrap';
+import SingleBook from './SingleBook.js';
+import { useState, useContext } from 'react';
+import { BookContext } from './Context.js';
+
 
 
 
 
 function BookCard() {
+  const { selectquery } = useContext(BookContext);
   const [visible, setVisible] = useState(12);
   function showMore() {
-    setVisible(visible + 12);
+    setVisible(visible + 12); 
   }
-  const [search, setSearch] = useState('');
-  const filteredData = data.filter((book) => {
-    return book.title.toLowerCase().includes(search.toLowerCase());
-  });
-
+  const filteredBooks = books.filter((book) =>
+    selectquery ? book.title.toLowerCase().includes(selectquery.toLowerCase()) : true
+  );
+  const [selectedBook, setSelectedBook] = useState(null);
+  
   return (
     <>
-      <Row>
-        <Form>
-          <Form.Group>
-            <Form.Control 
-            type="text" 
-            placeholder="Cerca" 
-            onChange={(e) => setSearch(e.target.value)}
-            />
-          </Form.Group>
-        </Form>
-      </Row>
-      <div className="container">
-        <Row className='mt-5'>
-          {filteredData.slice(0, visible).map((book) => {
-            return (
-              <Col md={3} key={book.asin} id={book.title} className='mb-5'>
-                <SingleBook book={book} />
-              </Col>
-            )
-          })}
-        </Row>
-      </div>
-      {visible < data.length && (
+          <Col >
+            <Row className='mt-5'>
+              {filteredBooks.slice(0, visible).map((book) => {
+                return (
+                  <Col md={4} lg={3} xs={12} key={book.asin}  className='Card mb-5'>
+                    <SingleBook 
+                    book={book} 
+                    key={book.asin}
+                    setSelectedBook={setSelectedBook}
+                    selectedBook={selectedBook}
+                    />
+                  </Col>
+                )
+              })}
+            </Row>
+          </Col> 
+      {visible < books.length && (
         <div className='text-center mb-4'>
           <Button onClick={showMore}>Mostra altri</Button>
         </div>
