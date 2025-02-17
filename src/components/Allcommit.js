@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Button } from 'react-bootstrap';
+import { Button , Table } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
+import ModifyModal from './ModifyModal';
 
 
 function Allcommit({book}) {
@@ -9,8 +10,13 @@ function Allcommit({book}) {
     const [error, setError] = useState(null);
     const { asin } = useParams();
     const [newComment, setNewComment] = useState('');
-    const [AddNewComment, setAddNewComment] = useState('');
     const [rating, setRating] = useState(0);
+    const [addNewComment, setAddNewComment] = useState('');
+    const [visible, setVisible] = useState(5);
+
+    const riceviInput = (e) => {
+        setAddNewComment(e);
+    }
 
 
     useEffect(() => {
@@ -34,7 +40,8 @@ function Allcommit({book}) {
                     setLoading(false);
                 });
         }
-    }, [asin, AddNewComment]);
+        console.log(addNewComment);
+    }, [asin, addNewComment]);
 
     const AddComment = () => {
         setLoading(true);
@@ -71,31 +78,6 @@ function Allcommit({book}) {
         });
     }
 
-    function NewComment(id) {
-        setLoading(true);
-        setAddNewComment(prompt("Inserisci il nuovo commento"))
-        console.log(AddNewComment)
-        modifyComment(id, AddNewComment)
-        setLoading(false);
-    }
-
-    function modifyComment(id, AddNewComment) {
-        fetch(`https://striveschool-api.herokuapp.com/api/comments/${id}`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-                "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Nzc2Y2MwNmNmOGIyNDAwMTU3NzFmYTkiLCJpYXQiOjE3Mzg5NTUwNTQsImV4cCI6MTc0MDE2NDY1NH0.r3tDY46smfi6LdVpeP4GZO03NMJUimF1sx5JUYNmzJs"
-            },
-            body: JSON.stringify({
-                comment: AddNewComment,
-            }),
-        })
-            .catch((err) => {
-                setError(err);
-                console.log("Errore nella modifica del commento:", err);
-            });
-    }
-
     if (error) {
         return <div>Errore nel recupero commenti</div>;
     }
@@ -109,7 +91,7 @@ function Allcommit({book}) {
     return (
         <>
             <div>
-                <h3 className='text-center'>{book.title}</h3>
+                <h3 className='text-center'>Comments</h3>
                 <div className='comment-area'>
                     <textarea
                         type="text"
@@ -138,16 +120,28 @@ function Allcommit({book}) {
                 <Button className='send-comment ' onClick={() => AddComment()}>Send Comment</Button>
             </div>
             <div>
-                {comments.map((comment) => (
-                    <ul key={comment._id}>
-                        <li>
-                            <p data-testid='comment'>{comment.comment}</p>
-                            <p>{comment.rate}</p>
-                            <Button className='delete-button mx-2' variant="danger" onClick={() => deleteComment(comment._id)}>Delete</Button>
-                            <Button className='modify-button' variant="warning" onClick={() => NewComment(comment._id)}>Modify</Button>
-                        </li>
-                    </ul>
-                ))}
+                <Table className='mt-4'> 
+                    <thead>
+                        <tr>
+                            <th>Comment</th>
+                            <th className='text-center'>Rate</th>
+                        </tr>
+                    </thead>
+                {comments.slice(0, visible).map((comment) => (
+                    <tr key={comment._id}>
+                        <td data-testid='comment'>{comment.comment}</td>
+                        <td className='text-center'>{comment.rate}</td>
+                        <td ><Button className='delete-button mx-2' variant="danger" onClick={() => deleteComment(comment._id)}>Delete</Button></td>
+                        <td><ModifyModal inviaInput={riceviInput} id={comment._id} /></td>
+                    </tr>
+                    ))}
+                </Table>
+                <div className='d-flex justify-content-center'>
+                    <Button className='show-more ' onClick={() => setVisible(visible + 5)}>Show More</Button>
+                    <div className='mx-2'>
+                        <Button className='show-more ' onClick={() => setVisible(5)}>Close</Button>
+                    </div>
+                </div>
             </div>
         </>
     );

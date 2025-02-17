@@ -9,4 +9,3 @@ it('renders exatly 12 books', () => {
     //verifica che il numero di immagini sia 12
     expect(bookImages).toHaveLength(12);
 });
- 

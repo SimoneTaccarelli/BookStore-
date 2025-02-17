@@ -1,10 +1,11 @@
 import { render, screen, fireEvent } from '@testing-library/react';
-import App from './App';
+import App from '../App';
 
 it('see the comment when click to details', async () => {
     render(<App />)
-    const Bcard = screen.getAllByText(/details/i);
     //prendi il primo bottone details
+    const Bcard = screen.getAllByText(/details/i);
+    
     const firstBottonCard = Bcard[0];
     //clicca sul bottone details
     fireEvent.click(firstBottonCard);

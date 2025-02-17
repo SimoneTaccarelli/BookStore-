@@ -9,7 +9,7 @@ function Details() {
     const DetailsBook = Book.find(book => book.asin === asin);
     return (
         <Container>
-            <h1>Details</h1>
+            <h1>{DetailsBook.title}</h1>
             <div className='details-container row'>
                 <div className='col-md-4'>
                     <img 

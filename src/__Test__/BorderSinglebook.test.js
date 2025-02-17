@@ -7,17 +7,29 @@ it('border change when click on the card', () => {
     
     // Verifica che le cards siano presenti
     const cards = screen.getAllByTestId('book-card');
-    expect(cards).toHaveLength(12);
     
     // Seleziona e clicca sulla prima card
-    const singleCard = cards[0]; // Nota: ho cambiato da 1 a 0 per il primo elemento
+    const singleCard = cards[0]; 
     
     // Verifica lo stato iniziale (opzionale)
-    expect(singleCard).not.toHaveStyle('border: 3px solid red');
+    expect(singleCard).not.toHaveClass('selected');
     
     // Clicca sulla card
     fireEvent.click(singleCard);
     
     // Verifica il cambio di stile
-    expect(singleCard).toHaveStyle('border: 3px solid red');
+    expect(singleCard).toHaveClass('selected');
+
+    // Verifica che la prima card non sia selezionata
+    const SecondSingleCard = cards[1];
+
+    //clicca sulla seconda card
+    fireEvent.click(SecondSingleCard);
+
+    //verifica che la seconda card sia selezionata
+    expect(SecondSingleCard).toHaveClass('selected');
+
+    //verifica che la prima card non sia selezionata
+    expect(singleCard).not.toHaveClass('selected');
+
 });

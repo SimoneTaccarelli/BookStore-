@@ -7,6 +7,7 @@ import { BookProvider } from './components/Context.js';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home.js';
 import Details from './pages/Details.js';
+import Welcome from './components/Welcome.js';
 
 
 
@@ -15,6 +16,9 @@ function App() {
     <BrowserRouter>
       <BookProvider>
         <MyNav />
+        <header>
+          <Welcome />
+        </header>
         <main>
           <Container>
             <Routes>

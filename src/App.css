@@ -133,6 +133,32 @@ footer{
 
 }
 
+/* button table */
+
+.delete-button{
+  padding: 3px !important;
+  font-size: 15px !important;
+}
+
+.modify-button{
+  padding: 3px !important;
+  font-size: 15px !important;
+}
+
+/* table */
+
+.table{
+  font-size: 15px !important;
+  border-collapse: separate !important;
+  border-spacing: 0 10px !important;
+}
+
+
+
+
+
+
+
 
 
 
