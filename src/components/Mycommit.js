@@ -24,7 +24,7 @@ function Mycommit({book}) {
         fetch(`https://striveschool-api.herokuapp.com/api/comments`, {
             headers: {
                 'Content-Type': 'application/json',
-                Authorization : "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Nzc2Y2MwNmNmOGIyNDAwMTU3NzFmYTkiLCJpYXQiOjE3Mzc3NDQ5NzgsImV4cCI6MTczODk1NDU3OH0.pAKu-blSFPdC9wQschCGyVUxlIzJcokrIjDynNdFl_g",
+                Authorization : "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Nzc2Y2MwNmNmOGIyNDAwMTU3NzFmYTkiLCJpYXQiOjE3NDA1NjU4ODUsImV4cCI6MTc0MTc3NTQ4NX0.cEgCgJ6aPtsBuV9Q_paSTtA4XhMx_eRQfoHurVeQ4m8",
             },
             method: 'POST',
             body: JSON.stringify({
